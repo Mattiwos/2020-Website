@@ -7,6 +7,7 @@ MongoDB to store notes/tasks
    - [ ] morgan
    - [ ] helmet
    - [ ] cors
+   - [ ] mongodb
    - [ ] socketio
  - [ ] frontend 
    - [ ]skeleton css

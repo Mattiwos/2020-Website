@@ -1,0 +1,14 @@
+h1{
+	text-align-last: center;
+}
+p{
+	text-align-last: center;
+}
+.authkey label {
+text-align-last: center;
+}
+.authkey Button:hover{
+    font: white;
+    background: black;
+    color: aqua;
+}
