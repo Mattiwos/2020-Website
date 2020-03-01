@@ -4,7 +4,6 @@
   "description": "Using Vuejs for frontend and nodejs for backend  MongoDB to store notes/tasks",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "dev": "nodemon index.js"
   },

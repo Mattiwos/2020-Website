@@ -52,7 +52,6 @@ MongoClient.connect(url, { useNewUrlParser: true,useUnifiedTopology: true }, (er
   function updatenote(){
   db.collection(collname).find({}).toArray(function(err, result) {
     if (err) throw err;
-    
     return result;
     
   });
@@ -85,6 +84,19 @@ MongoClient.connect(url, { useNewUrlParser: true,useUnifiedTopology: true }, (er
 	})
 	socket.on('update',(arg)=>{
 		socket.emit('currlist',updatenote());
+	})
+	socket.on('sessionkey',(arg)=>{
+		if (arg.sesskey == spkey){
+		spkey = keygenerator.session_id()
+		socket.emit('ressessionkey',{
+			wrong: false
+		});
+		}
+		else{
+		socket.emit('ressessionkey',{
+                        wrong: true
+                });
+		}
 	})
         socket.on('disconnect', (arg)=>{
 
