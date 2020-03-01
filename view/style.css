@@ -6,9 +6,22 @@ p{
 }
 .authkey label {
 text-align-last: center;
+font-size: larger;
+max-width: fit-content;
+/*margin: auto;
+*/
+}
+.authkey input {
+    max-width: fit-content;
+    font-size: larger;
+    position: inherit;
+    top: 40%;
+    left: 80%;
+
+
 }
 .authkey Button:hover{
     font: white;
-    background: black;
+    background: white;
     color: aqua;
 }
