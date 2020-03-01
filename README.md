@@ -3,20 +3,21 @@ Using Vuejs for frontend and nodejs for backend
 MongoDB to store notes/tasks 
 ### ToDo: 
  - [ ] server 
-   - [ ] express
-   - [ ] morgan
-   - [ ] helmet
+   - [x] express
+   - [x] morgan
+   - [x] helmet
    - [ ] cors
-   - [ ] mongodb
-   - [ ] socketio
+   - [x]  mongodb
+   - [x] socketio
  - [ ] frontend 
-   - [ ]skeleton css
-   - [ ] login page
-     - [ ] auth key
+   - [x]skeleton css
+   - [x] login page
+     - [x] auth key
    - [ ]Display
+     - [ ] Reactjs 
      - [ ] Notes
      - [ ] Cap. of adding to the list
- - [ ] Database
-   - [ ]MongoDB
+ -[x] Database
+   - [x] MongoDB
  - [ ]Python client 
    
