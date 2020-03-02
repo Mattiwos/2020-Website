@@ -9,15 +9,16 @@ MongoDB to store notes/tasks
    - [ ] cors
    - [x]  mongodb
    - [x] socketio
+   - [ ] API
  - [ ] frontend 
-   - [x]skeleton css
+   - [x] skeleton css
    - [x] login page
      - [x] auth key
-   - [ ]Display
+   - [ ] Display
      - [ ] Reactjs 
      - [ ] Notes
-     - [ ] Cap. of adding to the list
- -[x] Database
+     - [ ] cap. of adding to the list
+ - [x] Database
    - [x] MongoDB
- - [ ]Python client 
+ - [ ] Python client 
    
