@@ -17,8 +17,8 @@ MongoDB to store notes/tasks
    - [ ]Display
      - [ ] Reactjs 
      - [ ] Notes
-     - [ ] Cap. of adding to the list
+     - [ ] cap. of adding to the list
  -[x] Database
    - [x] MongoDB
- - [ ]Python client 
+ - [ ] Python client 
    
