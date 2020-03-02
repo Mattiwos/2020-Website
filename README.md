@@ -14,11 +14,11 @@ MongoDB to store notes/tasks
    - [x] skeleton css
    - [x] login page
      - [x] auth key
-   - [ ]Display
+   - [ ] Display
      - [ ] Reactjs 
      - [ ] Notes
      - [ ] cap. of adding to the list
- -[x] Database
+ - [x] Database
    - [x] MongoDB
  - [ ] Python client 
    
