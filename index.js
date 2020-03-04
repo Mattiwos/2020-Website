@@ -58,10 +58,11 @@ MongoClient.connect(url, { useNewUrlParser: true,useUnifiedTopology: true }, (er
   
   }
 
-	console.log(updatenote());
+        console.log(updatenote());
+        var spkey = keygenerator.session_id();
   io.on('connection', (socket)=>{
 	var authkey = Math.round(Math.random()*1000000);
-	var spkey = keygenerator.session_id();
+	
 	console.log(authkey);
         socket.on('authreq',(arg)=>{
         if (arg.key ==  authkey){
@@ -96,6 +97,7 @@ MongoClient.connect(url, { useNewUrlParser: true,useUnifiedTopology: true }, (er
 		socket.emit('ressessionkey',{
                         wrong: true
                 });
+                spkey = keygenerator.session_id();
 		}
 	})
         socket.on('disconnect', (arg)=>{

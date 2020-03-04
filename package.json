@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "both": "concurrently \" node index.js arg\" \"cd client; npm start arg\"",
     "dev": "nodemon index.js"
   },
   "repository": {
@@ -19,6 +20,7 @@
   "homepage": "https://github.com/Mattiwos/Notes-Application#readme",
   "dependencies": {
     "assert": "^2.0.0",
+    "concurrently": "^5.1.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "helmet": "^3.21.3",

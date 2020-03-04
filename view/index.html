@@ -22,21 +22,15 @@
 </div>
 <script>
 function runswhenbuttonisclicked(){
-/**
-const socket = io(
-  {transports: ['websocket']},
-  { forceNew: true }
-  );
-socket.on('reconnect_attempt', () => {
-  socket.io.opts.transports = ['polling', 'websocket'];
-});
-*/  
+
 var input = document.getElementById("key").value.toString()
   socket.emit('authreq',{
 key: input,
 });
 }
 </script>
+
+
 <script>
 const socket = io(
   {transports: ['websocket']},
