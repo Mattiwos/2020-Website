@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "client": "cd client; npm start",
     "both": "concurrently \" node index.js arg\" \"cd client; npm start arg\"",
     "dev": "nodemon index.js"
   },
@@ -29,6 +30,7 @@
     "mongoose": "^5.9.2",
     "morgan": "^1.9.1",
     "nodemon": "^2.0.2",
+    "pre-commit": "^1.2.2",
     "socketio": "^1.0.0"
   }
 }

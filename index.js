@@ -7,9 +7,12 @@ const keygenerator = require('keygenerator');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const cors = require('cors');
+
+
+
 app.use(helmet());
 app.use(morgan('common'));
-app.use(cors());
+
 const assert = require('assert');
 const password = "Iag8m4arZ9ymTyPz";
 const { MongoClient } = require('mongodb');
@@ -19,8 +22,26 @@ const dbName = 'NoteApp'
 let db
 const collname = 'Notes';
 
-
-
+app.options('*', cors()) // include before other routes
+app.get('/products/:id', cors(), function (req, res, next) {
+        res.json({msg: 'This is CORS-enabled for a Single Route'})
+})
+app.head("/getres", cors(), (req, res) => {
+        console.info("HEAD /simple-cors");
+        res.sendStatus(204);
+      });
+      app.get("/ggetres", cors(), (req, res) => {
+        console.info("GET /simple-cors");
+        res.json({
+          text: "Simple CORS requests are working. [GET]"
+        });
+      });
+      app.post("/getres", cors(), (req, res) => {
+        console.info("POST /simple-cors");
+        res.json({
+          text: "Simple CORS requests are working. [POST]"
+        });
+      });
 
 app.use(express.static('public'));
 app.use(express.static('view'));
@@ -28,7 +49,7 @@ app.use(express.static('assets'));
 
 
 app.get('/', (req, res)=>{
-        res.render('index.html');
+
 })
 
 
@@ -53,16 +74,16 @@ MongoClient.connect(url, { useNewUrlParser: true,useUnifiedTopology: true }, (er
   db.collection(collname).find({}).toArray(function(err, result) {
     if (err) throw err;
     return result;
-    
+
   });
-  
+
   }
 
         console.log(updatenote());
         var spkey = keygenerator.session_id();
   io.on('connection', (socket)=>{
 	var authkey = Math.round(Math.random()*1000000);
-	
+
 	console.log(authkey);
         socket.on('authreq',(arg)=>{
         if (arg.key ==  authkey){
