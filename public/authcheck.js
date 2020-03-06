@@ -16,7 +16,7 @@ key = urlParams.getAll("key") || null;
 
 socket.emit("sessionkey", {
   sesskey: key
-});
+}); //s
 socket.on("ressessionkey", arg => {
   if (arg.wrong == true) {
     alert("NO NO NO haha");
