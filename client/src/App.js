@@ -1,14 +1,30 @@
 import React from 'react';
 
-import Login from "./components/Login.js"
+import {BrowserRouter, Route} from 'react-router-dom';
+
+import Dashboard from "./Dashboard/Dashboard.js"
+import Home from "./Homepage/Home.js"
+
 import './App.css';
+
 
 function App() {
   return (
-    <div className="App">
-
-      <Login></Login>
-    </div>
+    <BrowserRouter>
+        <div>
+          <Route exact={true} path='/' render={() => (
+            <div className="App">
+              <Home />
+            </div>
+          )}/>
+          <Route path='/dashboard' render={() => (
+            <div className="App">
+              <Dashboard />
+            </div>
+          )}/>
+          
+        </div>
+      </BrowserRouter>
   );
 }
 

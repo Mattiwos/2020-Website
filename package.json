@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "client": "cd client; npm start",
-    "both": "concurrently \" node index.js arg\" \"cd client; npm start arg\"",
+    "both": "concurrently \" nodemon index.js arg\" \"cd client; npm start arg\"",
     "dev": "nodemon index.js"
   },
   "repository": {

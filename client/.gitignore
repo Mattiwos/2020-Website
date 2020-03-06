@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+#senstive info
+secret.js
+
 # testing
 /coverage
 

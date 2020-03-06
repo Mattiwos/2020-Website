@@ -44,7 +44,7 @@ app.head("/getres", cors(), (req, res) => {
       });
 
 app.use(express.static('public'));
-app.use(express.static('view'));
+//app.use(express.static('view'));
 app.use(express.static('assets'));
 
 
@@ -83,20 +83,23 @@ MongoClient.connect(url, { useNewUrlParser: true,useUnifiedTopology: true }, (er
         var spkey = keygenerator.session_id();
   io.on('connection', (socket)=>{
 	var authkey = Math.round(Math.random()*1000000);
-
-	console.log(authkey);
+  
+  console.log(authkey);
+  
         socket.on('authreq',(arg)=>{
         if (arg.key ==  authkey){
                 socket.emit('authres',{
                 wrong: false,
                 key: spkey
                 })
+                console.log(arg.key);
                 console.log('Redirect to website')
         }
         else{
         socket.emit('authres',{
                 wrong: true
                 });
+                console.log(arg.key);
                 console.log('Attempt for authkey denied')
         }
 
