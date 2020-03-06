@@ -1,56 +1,50 @@
 <!DOCTYPE html>
 
 <html>
-<head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
-<link rel="stylesheet" type="text/css" href="style.css">
-<meta charset="utf-8" />
-<title>Notes</title>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <meta charset="utf-8" />
+    <title>Notes</title>
+  </head>
+  <body>
+    <h1>Notes</h1>
+    <p>By Mattiwos</p>
+    <script src="/socket.io/socket.io.js"></script>
 
-</head>
-<body>
-<h1>Notes</h1>
-<p>By Mattiwos</p>
-<script src="/socket.io/socket.io.js"></script>
+    <div class="authkey">
+      <label for="key">Auth-Key </label>
 
-<div class = "authkey">
-<label for = "key">Auth-Key </label>
+      <input class="u-full-width" type="text" id="key" name="key" />
+      <button id="submit" type="button" onclick="runswhenbuttonisclicked()">
+        Submit
+      </button>
+    </div>
+    <script>
+      function runswhenbuttonisclicked() {
+        var input = document.getElementById("key").value.toString();
+        socket.emit("authreq", {
+          key: input
+        });
+      }
+    </script>
 
-<input class="u-full-width" type="text" id="key" name="key">
-<button id="submit" type = "button" onclick="runswhenbuttonisclicked()">Submit</button>
-
-</div>
-<script>
-function runswhenbuttonisclicked(){
-
-var input = document.getElementById("key").value.toString()
-  socket.emit('authreq',{
-key: input,
-});
-}
-</script>
-
-
-<script>
-const socket = io(
-  {transports: ['websocket']},
-  { forceNew: true }
-  );
-socket.on('reconnect_attempt', () => {
-  socket.io.opts.transports = ['polling', 'websocket'];
-});
-socket.on('authres',(arg)=>{
-if (arg.wrong == true){
-alert("Key is incorrect");
-}
-if (arg.wrong == false){
- window.location.href = `note.html?key=${arg.key}`;
-
-}
-
-});
-
-</script>
-
-</body>
+    <script>
+      const socket = io({ transports: ["websocket"] }, { forceNew: true });
+      socket.on("reconnect_attempt", () => {
+        socket.io.opts.transports = ["polling", "websocket"];
+      });
+      socket.on("authres", arg => {
+        if (arg.wrong == true) {
+          alert("Key is incorrect");
+        }
+        if (arg.wrong == false) {
+          window.location.href = `note.html?key=${arg.key}`;
+        }
+      });
+    </script>
+  </body>
 </html>

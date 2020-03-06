@@ -1,27 +1,25 @@
-h1{
-	text-align-last: center;
+h1 {
+  text-align-last: center;
 }
-p{
-	text-align-last: center;
+p {
+  text-align-last: center;
 }
 .authkey label {
-text-align-last: center;
-font-size: larger;
-max-width: fit-content;
-/*margin: auto;
+  text-align-last: center;
+  font-size: larger;
+  max-width: fit-content;
+  /*margin: auto;
 */
 }
 .authkey input {
-    max-width: fit-content;
-    font-size: larger;
-    position: inherit;
-    top: 40%;
-    left: 80%;
-
-
+  max-width: fit-content;
+  font-size: larger;
+  position: inherit;
+  top: 40%;
+  left: 80%;
 }
-.authkey Button:hover{
-    font: white;
-    background: white;
-    color: aqua;
+.authkey Button:hover {
+  font: white;
+  background: white;
+  color: aqua;
 }

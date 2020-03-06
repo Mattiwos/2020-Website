@@ -1,33 +1,37 @@
-import React from 'react';
+import React from "react";
 
-import {BrowserRouter, Route} from 'react-router-dom';
+import { BrowserRouter, Route } from "react-router-dom";
 
-import Dashboard from "./Dashboard/Dashboard.js"
-import Home from "./Homepage/Home.js"
+import Dashboard from "./Dashboard/Dashboard.js";
+import Home from "./Homepage/Home.js";
 
-import './App.css';
-
+import "./App.css";
 
 function App() {
   return (
     <BrowserRouter>
-        <div>
-          <Route exact={true} path='/' render={() => (
+      <div>
+        <Route
+          exact={true}
+          path="/"
+          render={() => (
             <div className="App">
               <Home />
             </div>
-          )}/>
-          <Route path='/dashboard' render={() => (
+          )}
+        />
+        <Route
+          path="/dashboard"
+          render={() => (
             <div className="App">
               <Dashboard />
             </div>
-          )}/>
-          
-        </div>
-      </BrowserRouter>
+          )}
+        />
+      </div>
+    </BrowserRouter>
   );
 }
-
 
 export default App;
 
