@@ -36,12 +36,13 @@ class Dashboard extends React.Component {
     this.socket.on("reconnect_attempt", () => {
       this.socket.io.opts.transports = ["websocket"];
     });
+    this.sendReq();
 
     this.socket.on("ressessionkey", arg => {
       if (arg.wrong === true) { //Mattiwos
         //window.location.href = "/dashboard";
         this.setState(state => {
-          return { displayboard: true }; //remove
+          
         });
       } else {
         
@@ -77,11 +78,34 @@ class Dashboard extends React.Component {
     );
   }
   keyAuthentication() {
-    if (this.state.displayboard === false) {//Mattiwos 
-       return <Board></Board> ///<h1>Hm...</h1>;
+    if (this.state.displayboard === false) {
+       return <h1>Hm...</h1>;
     } else return <Board></Board>;
   }
-  
+  sendReq() {
+    console.log("Auth process started");
+    this.socket.emit("sessionkey", {
+      sesskey: getCookie("key")
+    });
+  }
 }
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(";");
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) === " ") {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) === 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+  
+
 
 export default Dashboard;
