@@ -10,6 +10,11 @@ import Board from "./Board.js";
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      displayboard: false
+    };
+
     this.baseUrl = localserverhost;
     this.socket = io(this.baseUrl, {
       reconnectionDelay: 1000,
@@ -31,8 +36,19 @@ class Dashboard extends React.Component {
     this.socket.on("reconnect_attempt", () => {
       this.socket.io.opts.transports = ["websocket"];
     });
+
+    this.socket.on("ressessionkey", arg => {
+      if (arg.wrong === true) {
+        //window.location.href = "/dashboard";
+      } else {
+        this.setState(state => {
+          return { displayboard: true };
+        });
+      }
+    });
   }
   render() {
+    this.sendReq();
     return (
       <BrowserRouter>
         <div>
@@ -48,29 +64,22 @@ class Dashboard extends React.Component {
           <Route
             exact={true}
             path="/dashboard/homepage"
-            render={() => <div className="App">{this.keyAuthentication}</div>}
+            render={() => <div className="App">{this.keyAuthentication()}</div>}
           />
         </div>
       </BrowserRouter>
     );
   }
-  async keyAuthentication() {
+  keyAuthentication() {
+    if (this.state.displayboard == false) {
+      return <h1>Hm...</h1>;
+    } else return <Board></Board>;
+  }
+  sendReq() {
     console.log("Auth process started");
     this.socket.emit("sessionkey", {
       sesskey: getCookie("key")
     });
-    console.log("Sent key and waiting for resp");
-
-    await this.socket.on("ressessionkey", arg => {
-      if (arg.wrong === true) {
-        alert("NO NO NO haha");
-        window.location.href = "/dashboard";
-        return <h1>??</h1>;
-      } else {
-        return <Board></Board>;
-      }
-    });
-    console.log("await");
   }
 }
 function getCookie(cname) {

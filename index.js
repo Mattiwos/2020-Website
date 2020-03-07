@@ -105,7 +105,6 @@ MongoClient.connect(
       });
       socket.on("sessionkey", arg => {
         if (arg.sesskey == spkey) {
-          spkey = keygenerator.session_id();
           socket.emit("ressessionkey", {
             wrong: false
           });
@@ -113,8 +112,12 @@ MongoClient.connect(
           socket.emit("ressessionkey", {
             wrong: true
           });
-          spkey = keygenerator.session_id();
         }
+      });
+      socket.on("homepagereq", arg => {
+        socket.emit("htmlpageres", {
+          pagetxt: "<h1>Secret flag{felixhowdidyougethere}</h1>"
+        });
       });
       socket.on("disconnect", arg => {});
     });
