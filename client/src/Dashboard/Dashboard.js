@@ -5,7 +5,7 @@ import React, { Component } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import io from "socket.io-client";
 import Login from "./Login.js";
-import Board from "./Board.js";
+import Board from "./Board";
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -71,8 +71,8 @@ class Dashboard extends React.Component {
     );
   }
   keyAuthentication() {
-    if (this.state.displayboard == false) {
-      return <h1>Hm...</h1>;
+    if (this.state.displayboard === false) { //Important Note uncomment and delete -Mattiwos
+      return <Board></Board>;
     } else return <Board></Board>;
   }
   sendReq() {

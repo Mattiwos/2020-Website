@@ -42,9 +42,6 @@ app.post("/getres", cors(), (req, res) => {
   });
 });
 
-app.use(express.static("public"));
-//app.use(express.static('view'));
-app.use(express.static("assets"));
 
 app.get("/", (req, res) => {});
 
