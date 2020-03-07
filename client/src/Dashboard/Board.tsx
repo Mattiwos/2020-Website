@@ -1,8 +1,15 @@
 import {App} from "../testsecret";
 var secret = new App.Secret;
 import * as React from "react";
-
+//import * as $ from 'jquery'
 import io from "socket.io-client";
+
+import jquery from "jquery";
+
+
+
+// this helps TypeScript to understand jQuery best !!!  otherwise It will confused .
+const $: JQueryStatic = jquery;
 
 
 interface Props {//interface is used to make entities such as Property conform with
@@ -10,19 +17,24 @@ interface Props {//interface is used to make entities such as Property conform w
 }
 
 interface State {
-    quantities: { [key: string]: number };  //represents elements of the page that could change
+  hasError: boolean;
+  htmltxt: string;
+  //quantities: { [key: string]: number};  //represents elements of the page that could change
 }
 
 class Board extends React.Component<Props, State> {
     baseUrl: string;
    
-    htmltxt: string;
+    
     dom: HTMLDivElement | undefined;
     socket: SocketIOClient.Socket;
+    getPageContainer: HTMLDivElement | null | undefined;
+    
     
 
   constructor(props: Props,state: State) {
     super(props);
+    // this.state = state;
     this.baseUrl= secret.getLocalhost();
     this.socket = io(this.baseUrl, {
       reconnectionDelay: 1000,
@@ -33,7 +45,9 @@ class Board extends React.Component<Props, State> {
       upgrade: false,
       rejectUnauthorized: false
     });
-    this.htmltxt = "<h2>Mattiwos flag not here</h2>";
+    this.state = { hasError: false, htmltxt:"<h2>Mattiwos flag not here</h2>" };
+
+  
 
     this.socket.on("connect", () => {
       console.log("socket connected!");
@@ -48,13 +62,22 @@ class Board extends React.Component<Props, State> {
     // }); Might not need it threw an error for .io
 
     this.socket.on("htmlpageres", (arg: { pagetxt: string; }) => {
-      this.htmltxt = arg.pagetxt;
+      console.log(arg.pagetxt)
+      this.setState(state => {
+        this.componentDidMount ()
+        return {htmltxt: arg.pagetxt};
+      })
+      
     });
 
     this.getPage = this.getPage.bind(this);
   }
   
 
+  getPage() {
+    console.log(this.stringToHTML(this.state.htmltxt).innerHTML)
+    return ((this.stringToHTML(this.state.htmltxt)));
+  }
   stringToHTML(str: string) {
     // this.parser = new DOMParser();
     // this.doc = this.parser.parseFromString(str, 'text/html');
@@ -63,25 +86,55 @@ class Board extends React.Component<Props, State> {
     this.dom.innerHTML = str;
     return this.dom;
   }
-  getPage() {
-    return ([this.stringToHTML(this.htmltxt)]);
+
+  componentDidMount () {
+
+    if (this.getPageContainer != null)
+      this.getPageContainer.appendChild(this.getPage());
+    
+
   }
 
   render() {
     return (
       <div>
-        <h1>Welcome Back!</h1>
-        {this.getPage()}
-        <button id="submit" type="button" onClick={() => this.htmlreq()}>Submit</button>
-        {/* {this.htmltxt.innerHTML} */}
+        
+        
+        <div ref={node => this.getPageContainer = node}>
+            <div id="hiddenpage"></div>
+        </div>
+
+        <button id="submit" type="button" onClick={() => this.htmlreq()}>Load Page</button>
+      
       </div>
     
     );
   }
-
   htmlreq() {
+    this.sendReq()
     this.socket.emit("homepagereq", {});
   }
+  sendReq() {
+    console.log("Auth process started");
+    this.socket.emit("sessionkey", {
+      sesskey: getCookie("key")
+    });
+  }
+}
+function getCookie(cname: string) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(";");
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) === " ") {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) === 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
 }
 
 export default Board;

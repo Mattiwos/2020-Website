@@ -38,9 +38,13 @@ class Dashboard extends React.Component {
     });
 
     this.socket.on("ressessionkey", arg => {
-      if (arg.wrong === true) {
+      if (arg.wrong === true) { //Mattiwos
         //window.location.href = "/dashboard";
+        this.setState(state => {
+          return { displayboard: true }; //remove
+        });
       } else {
+        
         this.setState(state => {
           return { displayboard: true };
         });
@@ -48,7 +52,7 @@ class Dashboard extends React.Component {
     });
   }
   render() {
-    this.sendReq();
+    
     return (
       <BrowserRouter>
         <div>
@@ -64,37 +68,20 @@ class Dashboard extends React.Component {
           <Route
             exact={true}
             path="/dashboard/homepage"
+
             render={() => <div className="App">{this.keyAuthentication()}</div>}
           />
+          
         </div>
       </BrowserRouter>
     );
   }
   keyAuthentication() {
-    if (this.state.displayboard === false) { //Important Note uncomment and delete -Mattiwos
-      return <Board></Board>;
+    if (this.state.displayboard === false) {//Mattiwos 
+       return <Board></Board> ///<h1>Hm...</h1>;
     } else return <Board></Board>;
   }
-  sendReq() {
-    console.log("Auth process started");
-    this.socket.emit("sessionkey", {
-      sesskey: getCookie("key")
-    });
-  }
+  
 }
-function getCookie(cname) {
-  var name = cname + "=";
-  var decodedCookie = decodeURIComponent(document.cookie);
-  var ca = decodedCookie.split(";");
-  for (var i = 0; i < ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) === " ") {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) === 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
+
 export default Dashboard;
