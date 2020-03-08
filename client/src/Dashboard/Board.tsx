@@ -13,7 +13,7 @@ import io from "socket.io-client";
 
 
 interface Props {//interface is used to make entities such as Property conform with
-    products: string[]; //contains all the properies such as html tag
+    products?: string[]; //contains all the properies such as html tag
 }
 
 interface State {

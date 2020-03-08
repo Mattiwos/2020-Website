@@ -1,21 +1,42 @@
-import { localserverhost } from "../secret.js";
+import {App} from "../testsecret";
+var secret = new App.Secret;
 
 // eslint-disable-next-line
 import React, { Component } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  RouteComponentProps,
+  BrowserRouter
+} from "react-router-dom";
+
+
 import io from "socket.io-client";
 import Login from "./Login";
 import Board from "./Board";
 
-class Dashboard extends React.Component {
-  constructor(props) {
+
+interface Props {
+    products: string[]; //contains all the properies such as html tag
+}
+interface State {
+    displayboard: boolean;
+}
+
+class Dashboard extends React.Component<Props, State> {
+    baseUrl: string;
+    socket: SocketIOClient.Socket;
+
+  constructor(props: Props,state: State) {
     super(props);
 
     this.state = {
       displayboard: false
     };
 
-    this.baseUrl = localserverhost;
+    this.baseUrl = secret.getLocalhost();
     this.socket = io(this.baseUrl, {
       reconnectionDelay: 1000,
       reconnection: true,
@@ -29,7 +50,7 @@ class Dashboard extends React.Component {
       console.log("socket connected!");
     });
 
-    this.socket.on("connect_error", err => {
+    this.socket.on("connect_error", (err: string) => {
       console.log("socket connected error --> " + err);
     });
 
@@ -38,7 +59,7 @@ class Dashboard extends React.Component {
     });
     this.sendReq();
 
-    this.socket.on("ressessionkey", arg => {
+    this.socket.on("ressessionkey", (arg: {wrong: boolean}) => {
       if (arg.wrong === true) { //Mattiwos
         //window.location.href = "/dashboard";
         this.setState(state => {
@@ -90,7 +111,7 @@ class Dashboard extends React.Component {
   }
 }
 
-function getCookie(cname) {
+function getCookie(cname: string) {
   var name = cname + "=";
   var decodedCookie = decodeURIComponent(document.cookie);
   var ca = decodedCookie.split(";");
