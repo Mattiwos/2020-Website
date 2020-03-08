@@ -1,5 +1,5 @@
 {
-  "name": "2020-Website",
+  "name": "notes-application",
   "version": "1.0.0",
   "description": "Using React for frontend and nodejs for backend  MongoDB to store notes/tasks and senstive info",
   "main": "index.js",
