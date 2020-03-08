@@ -4,7 +4,7 @@ import { localserverhost } from "../secret.js";
 import React, { Component } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import io from "socket.io-client";
-import Login from "./Login.js";
+import Login from "./Login";
 import Board from "./Board";
 
 class Dashboard extends React.Component {

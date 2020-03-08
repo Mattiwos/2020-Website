@@ -1,15 +1,34 @@
-// eslint-disable-next-line
-import React, { Component } from "react";
+import React from 'react'
+//import ReactDOM from 'react-dom'
 
+import {App} from "../testsecret";
+var secret = new App.Secret();
+
+
+// eslint-disable-next-line
+//import React, { Component } from "react";
+/* eslint-disable import/first */
 import io from "socket.io-client";
 
-import { localserverhost } from "../secret.js";
 
 //import io from "socketio";
-class Login extends React.Component {
-  constructor(props) {
+
+interface Props {//interface is used to make entities such as Property conform with
+    products: string[]; //contains all the properies such as html tag
+}
+
+interface State {
+    key: string;
+  //quantities: { [key: string]: number};  //represents elements of the page that could change
+}
+
+class Login extends React.Component<Props,State> {
+    baseUrl: any;
+    socket: SocketIOClient.Socket;
+    
+  constructor(props: Props,state: State) {
     super(props);
-    this.baseUrl = localserverhost;
+    this.baseUrl = secret.getLocalhost();
     this.socket = io(this.baseUrl, {
       reconnectionDelay: 1000,
       reconnection: true,
@@ -24,7 +43,7 @@ class Login extends React.Component {
       console.log("socket connected!");
     });
 
-    this.socket.on("connect_error", err => {
+    this.socket.on("connect_error", (err: string) => {
       console.log("socket connected error --> " + err);
     });
 
@@ -32,7 +51,7 @@ class Login extends React.Component {
       this.socket.io.opts.transports = ["websocket"];
     });
 
-    this.socket.on("authres", arg => {
+    this.socket.on("authres", (arg: { wrong: boolean; key: any; }) => {
       if (arg.wrong === true) {
         alert("Key is incorrect");
       }
@@ -44,12 +63,12 @@ class Login extends React.Component {
     console.log("response");
 
     this.state = {
-      key: ""
+      key: "None"
     };
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(event) {
+  handleChange(event: { target: { value: string; }; }) {
     this.setState({ key: event.target.value });
     console.log(this.state.key);
   }
@@ -75,7 +94,7 @@ class Login extends React.Component {
       </div>
     );
   }
-  buttonclick(e) {
+  buttonclick() {
     console.log(this.state.key);
     this.socket.emit("authreq", {
       key: this.state.key

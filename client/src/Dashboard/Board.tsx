@@ -1,15 +1,15 @@
 import {App} from "../testsecret";
-var secret = new App.Secret;
+var secret = new App.Secret();
+/* eslint-disable import/first */
 import * as React from "react";
-//import * as $ from 'jquery'
+
 import io from "socket.io-client";
 
-import jquery from "jquery";
 
 
 
 // this helps TypeScript to understand jQuery best !!!  otherwise It will confused .
-const $: JQueryStatic = jquery;
+
 
 
 interface Props {//interface is used to make entities such as Property conform with

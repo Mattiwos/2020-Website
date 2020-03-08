@@ -25,12 +25,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var testsecret_1 = require("../testsecret");
 var secret = new testsecret_1.App.Secret;
+/* eslint-disable import/first */
 var React = __importStar(require("react"));
-//import * as $ from 'jquery'
 var socket_io_client_1 = __importDefault(require("socket.io-client"));
-var jquery_1 = __importDefault(require("jquery"));
-// this helps TypeScript to understand jQuery best !!!  otherwise It will confused .
-var $ = jquery_1.default;
 var Board = /** @class */ (function (_super) {
     __extends(Board, _super);
     function Board(props, state) {
