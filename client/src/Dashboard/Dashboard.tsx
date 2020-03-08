@@ -1,3 +1,4 @@
+//not compiling
 import {App} from "../testsecret";
 var secret = new App.Secret;
 
