@@ -7,9 +7,7 @@ import React, { Component } from "react";
 
 import {
   BrowserRouter as Router,
-  Route,
-  Link,
-  RouteComponentProps,
+  Route,  
   BrowserRouter
 } from "react-router-dom";
 
@@ -26,7 +24,7 @@ interface State {
     displayboard: boolean;
 }
 
-class Dashboard extends React.Component<Props, State> {
+class Guide extends React.Component<Props, State> {
     baseUrl: string;
     socket: SocketIOClient.Socket;
 
@@ -62,7 +60,7 @@ class Dashboard extends React.Component<Props, State> {
 
     this.socket.on("ressessionkey", (arg: {wrong: boolean}) => {
       if (arg.wrong === true) { //Mattiwos
-        //window.location.href = "/dashboard";
+        //window.location.href = "/Guide";
         this.setState(state => {
           
         });
@@ -130,4 +128,4 @@ function getCookie(cname: string) {
   
 
 
-export default Dashboard;
+export default Guide;

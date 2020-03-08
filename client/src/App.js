@@ -2,7 +2,7 @@ import React from "react";
 
 import { BrowserRouter, Route } from "react-router-dom";
 
-import {Dashboard} from "./Dashboard/Dashboard";
+import {Guide} from "./Dashboard/Guide";
 import Home from "./Homepage/Home.js";
 
 import "./App.css";
@@ -24,7 +24,7 @@ function App() {
           path="/dashboard"
           render={() => (
             <div className="App">
-              <Dashboard />
+              <Guide />
             </div>
           )}
         />
